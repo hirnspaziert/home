@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hirnspaziert – visuelle Begleiter für neurodivergente Gehirne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF8F4;
+    --cream-dark: #F2EEE8;
+    --charcoal: #1C1A18;
+    --charcoal-light: #3D3A36;
+    --muted: #8A8480;
+    --accent: #C4734A;
+    --accent-light: #F0E0D6;
+    --accent-pale: #FBF4F0;
+    --sage: #7A9E8E;
+    --sage-light: #EAF2EE;
+    --border: rgba(28,26,24,0.1);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--charcoal-light);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(196,115,74,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(122,158,142,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 19px);
+    font-weight: 300;
+    color: var(--charcoal-light);
+    max-width: 540px;
+    line-height: 1.65;
+    margin-bottom: 44px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--cream);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--charcoal-light);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 30px;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--charcoal); color: var(--charcoal); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 96px 24px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .section-h2 em { font-style: italic; color: var(--accent); }
+
+  .section-text {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--charcoal-light);
+    max-width: 580px;
+    line-height: 1.75;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── NAME SECTION ─── */
+  #name {
+    background: var(--cream-dark);
+    padding: 72px 24px;
+  }
+
+  .name-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .name-word {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 80px);
+    font-weight: 700;
+    letter-spacing: -3px;
+    line-height: 1;
+    color: var(--charcoal);
+  }
+  .name-word .part-accent { color: var(--accent); font-style: italic; }
+
+  .name-meanings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .name-item {
+    padding: 18px 22px;
+    background: var(--cream);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .name-item:last-child { border-left-color: var(--sage); }
+
+  .name-item .part {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .name-item:last-child .part { color: var(--sage); }
+
+  .name-item .meaning {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .name-item .explain {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── MISSION ─── */
+  #mission { background: var(--cream); }
+
+  .mission-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .mission-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--charcoal);
+    border-left: 2px solid var(--accent);
+    padding-left: 28px;
+  }
+
+  .mission-points {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 8px;
+  }
+
+  .mission-point {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .mp-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .mp-text .mp-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .mp-text .mp-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* ─── PRODUKTE ─── */
+  #produkte { background: var(--cream-dark); }
+
+  .produkte-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .produkte-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .produkt-card {
+    background: var(--cream);
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .produkt-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 18px 18px 0 0;
+  }
+  .produkt-card.p1::before { background: var(--accent); }
+  .produkt-card.p2::before { background: #D4956A; }
+  .produkt-card.p3::before { background: var(--sage); }
+  .produkt-card.p4::before { background: #9B7EC8; }
+
+  .produkt-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(28,26,24,0.08);
+  }
+
+  .p-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  .p1 .p-tag { background: var(--accent-light); color: var(--accent); }
+  .p2 .p-tag { background: #F5E8DF; color: #C47840; }
+  .p3 .p-tag { background: var(--sage-light); color: var(--sage); }
+  .p4 .p-tag { background: #F0EBF8; color: #7B5EA7; }
+
+  .p-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .p-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .p-subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .p-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal-light);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .p-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .p-example {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--cream-dark);
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ─── ÜBER MICH ─── */
+  #ueber { background: var(--cream); }
+
+  .ueber-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .ueber-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    flex-shrink: 0;
+    border: 4px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--border);
+  }
+
+  .ueber-text .ueber-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .ueber-text .ueber-role {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .ueber-text .ueber-bio {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--charcoal-light);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+  .ueber-text .ueber-bio strong {
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  /* ─── KONTAKT ─── */
+  #kontakt {
+    background: var(--charcoal);
+    color: var(--cream);
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  #kontakt .section-label { color: var(--accent); }
+
+  #kontakt .section-h2 { color: var(--cream); margin-bottom: 14px; }
+  #kontakt .section-text { color: rgba(250,248,244,0.6); margin: 0 auto 40px; }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(250,248,244,0.08);
+    border: 1px solid rgba(250,248,244,0.15);
+    color: var(--cream);
+    padding: 12px 22px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .social-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: rgba(250,248,244,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width: 700px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .name-split { grid-template-columns: 1fr; gap: 28px; }
+    .mission-layout { grid-template-columns: 1fr; gap: 36px; }
+    .produkte-grid { grid-template-columns: 1fr; }
+    .ueber-layout { grid-template-columns: 1fr; text-align: center; }
+    .ueber-avatar { margin: 0 auto; }
+    .ueber-text .ueber-bio { max-width: 100%; }
+    .produkte-intro { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">hirn<span>spaziert</span></a>
+  <ul class="nav-links">
+    <li><a href="#name">die idee</a></li>
+    <li><a href="#mission">mission</a></li>
+    <li><a href="#produkte">produkte</a></li>
+    <li><a href="#ueber">über mich</a></li>
+    <li><a href="#kontakt">kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">🧠 visuelle Begleiter für neurodivergente Gehirne</div>
+  <h1 class="hero-h1">
+    Dein Gehirn<br>
+    <em>spaziert.</em><br>
+    Wir auch.
+  </h1>
+  <p class="hero-sub">
+    Digitale Produkte für ADHS und neurodivergente Menschen — die sich nach Klarheit, Verständnis und einem kleinen Schmunzeln sehnen.
+  </p>
+  <div class="hero-cta">
+    <a href="#produkte" class="btn-primary">Produkte entdecken</a>
+    <a href="#ueber" class="btn-secondary">Meine Geschichte</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- NAME ERKLÄRUNG -->
+<section id="name">
+  <div class="section-inner">
+    <div class="name-split reveal">
+      <div>
+        <span class="section-label">der name</span>
+        <div class="name-word">
+          hirn<br><span class="part-accent">spaziert</span>
+        </div>
+      </div>
+      <div class="name-meanings">
+        <div class="name-item">
+          <div class="part">Hirn</div>
+          <div class="meaning">unser neurodiverses Gehirn</div>
+          <div class="explain">Das ADHS-Gehirn, das anders denkt, anders fühlt, anders ist — und das ist okay.</div>
+        </div>
+        <div class="name-item">
+          <div class="part">spaziert</div>
+          <div class="meaning">wandert · schweift ab · tanzt</div>
+          <div class="explain">Nicht verloren — nur auf einem anderen Weg. Unser Geist ist unterwegs, nicht kaputt.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="section-inner">
+    <span class="section-label reveal">warum ich das mache</span>
+    <div class="mission-layout">
+      <div class="reveal">
+        <blockquote class="mission-quote">
+          "Für alle, die sich ihr Leben lang erklärt haben — hier gibt es Bilder, die das für euch tun."
+        </blockquote>
+      </div>
+      <div class="mission-points reveal">
+        <div class="mission-point">
+          <div class="mp-icon">🔍</div>
+          <div class="mp-text">
+            <div class="mp-title">Sichtbarkeit</div>
+            <div class="mp-desc">ADHS & Neurodivergenz endlich so erklärt, dass man sagt: "Das bin ich."</div>
+          </div>
+        </div>
+        <div class="mission-point">
+          <div class="mp-icon">😌</div>
+          <div class="mp-text">
+            <div class="mp-title">Entlastung</div>
+            <div class="mp-desc">Externe Struktur für Gehirne, die intern selten Ruhe haben.</div>
+          </div>
+        </div>
+        <div class="mission-point">
+          <div class="mp-icon">😄</div>
+          <div class="mp-text">
+            <div class="mp-title">Ein bisschen Humor</div>
+            <div class="mp-desc">Weil Lachen über das eigene Chaos das Chaos nicht wegmacht — aber leichter trägt.</div>
+          </div>
+        </div>
+        <div class="mission-point">
+          <div class="mp-icon">🌱</div>
+          <div class="mp-text">
+            <div class="mp-title">Selbstverständnis</div>
+            <div class="mp-desc">Sich selbst besser kennen — durch Fragen, Reflexion und visuelle Klarheit.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUKTE -->
+<section id="produkte">
+  <div class="section-inner">
+    <div class="produkte-intro">
+      <div class="reveal">
+        <span class="section-label">die produktwelt</span>
+        <h2 class="section-h2">Vier Wege,<br>dein Gehirn zu <em>begleiten</em></h2>
+      </div>
+      <p class="section-text reveal" style="max-width:260px; font-size:14px;">
+        Alle Produkte sind digital — sofort nach dem Kauf zum Download verfügbar.
+      </p>
+    </div>
+
+    <div class="produkte-grid">
+
+      <div class="produkt-card p1 reveal">
+        <div class="p-number">01</div>
+        <div class="p-tag">begreifen</div>
+        <div class="p-name">Wissen<br>Booster</div>
+        <div class="p-subtitle">ADHS verstehen auf einen Blick</div>
+        <div class="p-desc">Infografiken und Wissen-Poster, die erklären wie das ADHS-Gehirn wirklich funktioniert — visuell, klar, zum Aufhängen.</div>
+        <div class="p-examples">
+          <span class="p-example">Infografiken</span>
+          <span class="p-example">Erklärungs-Poster</span>
+          <span class="p-example">Wissenskarten</span>
+        </div>
+      </div>
+
+      <div class="produkt-card p2 reveal">
+        <div class="p-number">02</div>
+        <div class="p-tag">fühlen</div>
+        <div class="p-name">Humor &<br>Herz</div>
+        <div class="p-subtitle">Sprüche die treffen & schmunzeln lassen</div>
+        <div class="p-desc">Humorvolle Poster und Postkarten über das ADHS-Leben — für alle, die sich endlich wiedererkannt fühlen wollen.</div>
+        <div class="p-examples">
+          <span class="p-example">Sprüche-Poster</span>
+          <span class="p-example">Postkarten</span>
+          <span class="p-example">Wallpaper</span>
+        </div>
+      </div>
+
+      <div class="produkt-card p3 reveal">
+        <div class="p-number">03</div>
+        <div class="p-tag">ordnen</div>
+        <div class="p-name">Externe<br>Struktur</div>
+        <div class="p-subtitle">Für dein Gehirn, von außen nach innen</div>
+        <div class="p-desc">Notion-Templates, Tracker und Planer — entwickelt für Gehirne, die externe Systeme brauchen weil das interne selten aufräumt.</div>
+        <div class="p-examples">
+          <span class="p-example">Notion Templates</span>
+          <span class="p-example">Habit Tracker</span>
+          <span class="p-example">Tagesplaner</span>
+          <span class="p-example">Brain Dump</span>
+        </div>
+      </div>
+
+      <div class="produkt-card p4 reveal">
+        <div class="p-number">04</div>
+        <div class="p-tag">entdecken</div>
+        <div class="p-name">Dich selbst<br>verstehen</div>
+        <div class="p-subtitle">Reflexion & Selbstkenntnis</div>
+        <div class="p-desc">Arbeitsblätter und Workbooks mit Reflexionsfragen — um sich selbst besser zu kennen und das eigene ADHS zu verstehen.</div>
+        <div class="p-examples">
+          <span class="p-example">Workbooks</span>
+          <span class="p-example">Arbeitsblätter</span>
+          <span class="p-example">Reflexionskarten</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ÜBER MICH -->
+<section id="ueber">
+  <div class="section-inner">
+    <span class="section-label reveal">über mich</span>
+    <div class="ueber-layout">
+      <div class="ueber-avatar reveal">🧠</div>
+      <div class="ueber-text reveal">
+        <div class="ueber-name">hirnspaziert</div>
+        <div class="ueber-role">Gründerin · Neurodivergent · Visuell denkend</div>
+        <p class="ueber-bio">
+          <strong>Hirnspaziert entsteht aus meiner eigenen Reise mit ADHS</strong> — dem Chaos im Kopf und der Suche nach visueller Klarheit.
+          <br><br>
+          Ich habe lange gesucht nach Dingen, die mir helfen mich selbst zu verstehen, die mich zum Lachen bringen über das was in meinem Kopf passiert — und die mir trotzdem Struktur geben. Irgendwann habe ich aufgehört zu suchen und angefangen, sie selbst zu machen.
+          <br><br>
+          Hirnspaziert ist für alle, die ihren eigenen Kopf manchmal gerne hätten mit einer Bedienungsanleitung.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="section-inner">
+    <span class="section-label">lass uns verbinden</span>
+    <h2 class="section-h2" style="margin-bottom:14px;">Dein Hirn <em>spaziert</em>?<br>Meins auch.</h2>
+    <p class="section-text">Folg mir auf Instagram, schreib mir eine Nachricht — oder schau einfach mal rein. Du bist willkommen.</p>
+    <br><br>
+    <div class="social-links">
+      <a href="#" class="social-link">📷 Instagram</a>
+      <a href="#" class="social-link">🛒 Gumroad Shop</a>
+      <a href="mailto:hallo@hirnspaziert.at" class="social-link">✉️ hallo@hirnspaziert.at</a>
+    </div>
+    <div class="footer-note">© 2026 hirnspaziert · Österreich · Alle digitalen Produkte zum Download</div>
+  </div>
+</section>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>
+</body>
+</html>
