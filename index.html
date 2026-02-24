@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>hirnspaziert – visuelle Begleiter für neurodivergente Gehirne</title>
+<title>Hirnspaziert – visuelle Begleiter für Menschen mit ADHS</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -11,17 +11,15 @@
     --cream-dark: #F2EEE8;
     --charcoal: #1C1A18;
     --charcoal-light: #3D3A36;
-    --muted: #8A8480;
-    --accent: #C4734A;
-    --accent-light: #F0E0D6;
-    --accent-pale: #FBF4F0;
-    --sage: #7A9E8E;
-    --sage-light: #EAF2EE;
-    --border: rgba(28,26,24,0.1);
+    --muted: #7a7672;
+    --accent: #4a8c7e;
+    --accent-hover: #366b60;
+    --accent-light: #d8eeea;
+    --accent-mid: #7ab8ae;
+    --border: rgba(28,26,24,0.12);
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -41,7 +39,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 48px;
-    background: rgba(250,248,244,0.92);
+    background: rgba(250,248,244,0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid transparent;
     transition: border-color 0.3s;
@@ -60,17 +58,19 @@
 
   .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 32px;
     list-style: none;
   }
   .nav-links a {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    color: var(--charcoal-light);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--charcoal);
     text-decoration: none;
-    opacity: 0.7;
+    opacity: 0.6;
     transition: opacity 0.2s;
+    white-space: nowrap;
   }
   .nav-links a:hover { opacity: 1; }
 
@@ -91,8 +91,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(196,115,74,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(122,158,142,0.07) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(74,140,126,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(74,140,126,0.05) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -119,10 +119,7 @@
     margin-bottom: 28px;
     animation: fadeUp 0.8s ease 0.1s both;
   }
-  .hero-h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  .hero-h1 em { font-style: italic; color: var(--accent); }
 
   .hero-sub {
     font-size: clamp(16px, 2.5vw, 19px);
@@ -199,7 +196,7 @@
 
   .section-label {
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent);
@@ -256,11 +253,7 @@
   }
   .name-word .part-accent { color: var(--accent); font-style: italic; }
 
-  .name-meanings {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  .name-meanings { display: flex; flex-direction: column; gap: 20px; }
 
   .name-item {
     padding: 18px 22px;
@@ -268,7 +261,7 @@
     border-radius: 12px;
     border-left: 3px solid var(--accent);
   }
-  .name-item:last-child { border-left-color: var(--sage); }
+  .name-item:last-child { border-left-color: var(--accent-mid); }
 
   .name-item .part {
     font-size: 11px;
@@ -278,7 +271,7 @@
     color: var(--accent);
     margin-bottom: 4px;
   }
-  .name-item:last-child .part { color: var(--sage); }
+  .name-item:last-child .part { color: var(--accent-mid); }
 
   .name-item .meaning {
     font-family: 'Playfair Display', serif;
@@ -304,7 +297,7 @@
 
   .mission-quote {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 3vw, 30px);
+    font-size: clamp(20px, 3vw, 28px);
     font-weight: 400;
     font-style: italic;
     line-height: 1.5;
@@ -313,40 +306,25 @@
     padding-left: 28px;
   }
 
-  .mission-points {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 8px;
-  }
+  .mission-points { display: flex; flex-direction: column; gap: 24px; padding-top: 8px; }
 
-  .mission-point {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
+  .mission-point { display: flex; gap: 16px; align-items: flex-start; }
+
   .mp-icon {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
     background: var(--accent-light);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
     flex-shrink: 0;
+    color: var(--accent);
   }
-  .mp-text .mp-title {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-  .mp-text .mp-desc {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 300;
-    line-height: 1.55;
-  }
+  .mp-icon svg { width: 22px; height: 22px; }
+
+  .mp-text .mp-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+  .mp-text .mp-desc { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.55; }
 
   /* ─── PRODUKTE ─── */
   #produkte { background: var(--cream-dark); }
@@ -360,11 +338,7 @@
     gap: 16px;
   }
 
-  .produkte-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
+  .produkte-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
   .produkt-card {
     background: var(--cream);
@@ -381,89 +355,46 @@
     top: 0; left: 0; right: 0;
     height: 3px;
     border-radius: 18px 18px 0 0;
+    background: var(--accent);
   }
-  .produkt-card.p1::before { background: var(--accent); }
-  .produkt-card.p2::before { background: #D4956A; }
-  .produkt-card.p3::before { background: var(--sage); }
-  .produkt-card.p4::before { background: #9B7EC8; }
-
-  .produkt-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(28,26,24,0.08);
-  }
+  .produkt-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(28,26,24,0.07); }
 
   .p-tag {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-    display: inline-block;
-  }
-  .p1 .p-tag { background: var(--accent-light); color: var(--accent); }
-  .p2 .p-tag { background: #F5E8DF; color: #C47840; }
-  .p3 .p-tag { background: var(--sage-light); color: var(--sage); }
-  .p4 .p-tag { background: #F0EBF8; color: #7B5EA7; }
-
-  .p-number {
-    font-family: 'Playfair Display', serif;
     font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
-    color: var(--muted);
-    margin-bottom: 8px;
   }
 
   .p-name {
     font-family: 'Playfair Display', serif;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    line-height: 1.1;
-    margin-bottom: 6px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    color: var(--charcoal);
   }
 
-  .p-subtitle {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
+  .p-desc { font-size: 14px; font-weight: 300; color: var(--charcoal-light); line-height: 1.6; margin-bottom: 20px; }
 
-  .p-desc {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--charcoal-light);
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .p-examples {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  .p-examples { display: flex; flex-wrap: wrap; gap: 6px; }
   .p-example {
     font-size: 11px;
     padding: 4px 10px;
     border-radius: 20px;
-    background: var(--cream-dark);
-    color: var(--muted);
-    font-weight: 400;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 500;
   }
 
   /* ─── ÜBER MICH ─── */
   #ueber { background: var(--cream); }
 
-  .ueber-layout {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 64px;
-    align-items: center;
-  }
+  .ueber-layout { display: grid; grid-template-columns: auto 1fr; gap: 64px; align-items: center; }
 
   .ueber-avatar {
     width: 160px;
@@ -479,60 +410,25 @@
     box-shadow: 0 0 0 1px var(--border);
   }
 
-  .ueber-text .ueber-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
-  }
-  .ueber-text .ueber-role {
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .ueber-text .ueber-bio {
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--charcoal-light);
-    line-height: 1.75;
-    max-width: 520px;
-  }
-  .ueber-text .ueber-bio strong {
-    font-weight: 600;
-    color: var(--charcoal);
-  }
+  .ueber-text .ueber-name { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .ueber-text .ueber-role { font-size: 13px; color: var(--accent); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+  .ueber-text .ueber-bio { font-size: 16px; font-weight: 300; color: var(--charcoal-light); line-height: 1.75; max-width: 520px; }
+  .ueber-text .ueber-bio strong { font-weight: 600; color: var(--charcoal); }
 
   /* ─── KONTAKT ─── */
-  #kontakt {
-    background: var(--charcoal);
-    color: var(--cream);
-    text-align: center;
-    padding: 80px 24px;
-  }
-
-  #kontakt .section-label { color: var(--accent); }
-
+  #kontakt { background: var(--charcoal); color: var(--cream); text-align: center; padding: 80px 24px; }
+  #kontakt .section-label { color: var(--accent-mid); }
   #kontakt .section-h2 { color: var(--cream); margin-bottom: 14px; }
   #kontakt .section-text { color: rgba(250,248,244,0.6); margin: 0 auto 40px; }
 
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
+  .social-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
 
   .social-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     background: rgba(250,248,244,0.08);
-    border: 1px solid rgba(250,248,244,0.15);
+    border: 1px solid rgba(250,248,244,0.2);
     color: var(--cream);
     padding: 12px 22px;
     border-radius: 50px;
@@ -541,40 +437,33 @@
     text-decoration: none;
     transition: background 0.2s, border-color 0.2s;
   }
-  .social-link:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
+  .social-link:hover { background: var(--accent); border-color: var(--accent); }
 
-  .footer-note {
-    font-size: 12px;
-    color: rgba(250,248,244,0.3);
-    letter-spacing: 0.5px;
-  }
+  .footer-note { font-size: 12px; color: rgba(250,248,244,0.3); letter-spacing: 0.5px; }
+  .footer-note a { color: rgba(250,248,244,0.5); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+  .footer-note a:hover { color: rgba(250,248,244,0.85); }
+
+  /* ─── IMPRESSUM ─── */
+  #impressum { background: var(--cream-dark); padding: 64px 24px; }
+  .impressum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; }
+  .impressum-block h3 { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .impressum-block p { font-size: 14px; font-weight: 300; color: var(--charcoal-light); line-height: 1.75; font-style: italic; }
 
   /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ─── RESPONSIVE ─── */
-  @media(max-width: 700px) {
+  @media(max-width: 800px) {
     nav { padding: 16px 20px; }
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 10px; letter-spacing: 1px; }
+  }
+  @media(max-width: 600px) {
+    nav { padding: 14px 16px; }
     .nav-links { display: none; }
     .name-split { grid-template-columns: 1fr; gap: 28px; }
     .mission-layout { grid-template-columns: 1fr; gap: 36px; }
@@ -583,6 +472,7 @@
     .ueber-avatar { margin: 0 auto; }
     .ueber-text .ueber-bio { max-width: 100%; }
     .produkte-intro { flex-direction: column; align-items: flex-start; }
+    .impressum-grid { grid-template-columns: 1fr; gap: 28px; }
   }
 </style>
 </head>
@@ -590,31 +480,31 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nav-logo">hirn<span>spaziert</span></a>
+  <a href="#hero" class="nav-logo">Hirn<span>spaziert</span></a>
   <ul class="nav-links">
-    <li><a href="#name">die idee</a></li>
-    <li><a href="#mission">mission</a></li>
-    <li><a href="#produkte">produkte</a></li>
-    <li><a href="#ueber">über mich</a></li>
-    <li><a href="#kontakt">kontakt</a></li>
+    <li><a href="#name">DIE IDEE</a></li>
+    <li><a href="#mission">MISSION</a></li>
+    <li><a href="#produkte">PRODUKTE</a></li>
+    <li><a href="#ueber">ÜBER MICH</a></li>
+    <li><a href="#kontakt">KONTAKT</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-tag">🧠 visuelle Begleiter für neurodivergente Gehirne</div>
+  <div class="hero-tag">🧠 Visuelle Begleiter für Menschen mit ADHS</div>
   <h1 class="hero-h1">
     Dein Gehirn<br>
     <em>spaziert.</em><br>
-    Wir auch.
+    Meins auch.
   </h1>
   <p class="hero-sub">
-    Digitale Produkte für ADHS und neurodivergente Menschen — die sich nach Klarheit, Verständnis und einem kleinen Schmunzeln sehnen.
+    Digitale Produkte für Menschen mit ADHS — die sich nach Klarheit und Verständnis sehnen.
   </p>
   <div class="hero-cta">
     <a href="#produkte" class="btn-primary">Produkte entdecken</a>
-    <a href="#ueber" class="btn-secondary">Meine Geschichte</a>
+    <a href="#ueber" class="btn-secondary">Über mich</a>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -627,21 +517,21 @@
   <div class="section-inner">
     <div class="name-split reveal">
       <div>
-        <span class="section-label">der name</span>
+        <span class="section-label">Der Name</span>
         <div class="name-word">
-          hirn<br><span class="part-accent">spaziert</span>
+          Hirn<br><span class="part-accent">spaziert</span>
         </div>
       </div>
       <div class="name-meanings">
         <div class="name-item">
           <div class="part">Hirn</div>
-          <div class="meaning">unser neurodiverses Gehirn</div>
+          <div class="meaning">Das neurodivergente Gehirn</div>
           <div class="explain">Das ADHS-Gehirn, das anders denkt, anders fühlt, anders ist — und das ist okay.</div>
         </div>
         <div class="name-item">
-          <div class="part">spaziert</div>
-          <div class="meaning">wandert · schweift ab · tanzt</div>
-          <div class="explain">Nicht verloren — nur auf einem anderen Weg. Unser Geist ist unterwegs, nicht kaputt.</div>
+          <div class="part">Spaziert</div>
+          <div class="meaning">Wandert · schweift ab · tanzt</div>
+          <div class="explain">Nicht verloren — nur auf einem anderen Weg. Unser Geist ist lebhafter als andere, und das ist in Ordnung so.</div>
         </div>
       </div>
     </div>
@@ -651,42 +541,159 @@
 <!-- MISSION -->
 <section id="mission">
   <div class="section-inner">
-    <span class="section-label reveal">warum ich das mache</span>
+    <span class="section-label reveal">Warum ich das mache</span>
     <div class="mission-layout">
       <div class="reveal">
         <blockquote class="mission-quote">
-          "Für alle, die sich ihr Leben lang erklärt haben — hier gibt es Bilder, die das für euch tun."
+          "Weil es nichts Befreienderes gibt, als endlich ein Bild zu sehen, das genau das zeigt, was in einem vorgeht."
         </blockquote>
       </div>
       <div class="mission-points reveal">
+
         <div class="mission-point">
-          <div class="mp-icon">🔍</div>
+          <div class="mp-icon"><svg width="22px" height="22px" viewBox="0 0 197 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-7391.678111,-4449.650341)">
+        <g transform="matrix(1,0,0,1,-0.251969,2717)">
+            <g transform="matrix(1,0,0,1,182,417)">
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7371.881,4041.382C7354.173,4033.215 7294.687,4024.92 7282.263,4086.93C7279.789,4099.277 7286.977,4127.479 7311.752,4144.776C7332.723,4159.418 7386.265,4154.742 7398.986,4116.449C7411.665,4078.283 7394.835,4051.969 7371.881,4041.382Z" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(0.769617,0,0,0.769617,1691.856671,-1773.345492)">
+                    <path d="M7371.881,4041.382C7354.173,4033.215 7294.687,4024.92 7282.263,4086.93C7279.789,4099.277 7286.977,4127.479 7311.752,4144.776C7332.723,4159.418 7386.265,4154.742 7398.986,4116.449C7411.665,4078.283 7394.835,4051.969 7371.881,4041.382Z" style="fill:none;stroke:currentColor;stroke-width:8.12px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7273.168,4142.878C7262.772,4151.104 7213.451,4194.425 7212.814,4206.958C7212.398,4215.166 7223.609,4227.087 7234.938,4217.595C7259.563,4196.962 7287.873,4166.094 7292.213,4161.362C7287.315,4153.261 7284.831,4150.26 7273.168,4142.878Z" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7283.94,4149.187C7285.575,4147.947 7297.228,4136.557 7298.367,4135.682" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg></div>
           <div class="mp-text">
             <div class="mp-title">Sichtbarkeit</div>
             <div class="mp-desc">ADHS & Neurodivergenz endlich so erklärt, dass man sagt: "Das bin ich."</div>
           </div>
         </div>
+
         <div class="mission-point">
-          <div class="mp-icon">😌</div>
+          <div class="mp-icon"><svg width="22px" height="22px" viewBox="0 0 194 171" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-6630.990272,-3483.365646)">
+        <g transform="matrix(1,0,0,1,-0.251969,2717)">
+            <g transform="matrix(0.701904,0,0,0.701904,3326.212703,-2078.263646)">
+                <path d="M4844.776,4291.141C4690.734,4149.099 4711.58,4128.002 4717.343,4105.117C4728.901,4059.217 4808.226,4029.425 4846.593,4096.095C4892.59,4048.359 4934.857,4054.74 4957.153,4074.254C4985.112,4098.725 4985.672,4146.711 4968.414,4167.117C4924.683,4218.82 4935.107,4204.871 4844.776,4291.141Z" style="fill:none;stroke:currentColor;stroke-width:8.9px;"/>
+            </g>
+        </g>
+    </g>
+</svg></div>
           <div class="mp-text">
             <div class="mp-title">Entlastung</div>
             <div class="mp-desc">Externe Struktur für Gehirne, die intern selten Ruhe haben.</div>
           </div>
         </div>
+
         <div class="mission-point">
-          <div class="mp-icon">😄</div>
+          <div class="mp-icon"><svg width="22px" height="22px" viewBox="0 0 180 209" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-6622.075105,-2964.164702)">
+        <g transform="matrix(1,0,0,1,-0.251969,2717)">
+            <g transform="matrix(1,0,0,1,-88,-231)">
+                <g transform="matrix(1,0,0,1,-2035,-389)">
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8765.662,3608.432C8773.43,3612.528 8773.439,3612.001 8780.639,3617.321" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8748.2,3666.84C8753.355,3666.831 8758.51,3666.822 8763.666,3666.813" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8784.415,3710.613C8781.167,3714.262 8777.918,3717.912 8774.67,3721.561" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8890.354,3621.948L8901.509,3615.363" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8903.057,3668.768L8921.189,3668.768" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8890.942,3712.857C8900.9,3717.791 8900.554,3717.839 8909.566,3724.4" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8813.55,3739.835C8811.659,3717.548 8777.16,3691.809 8785.493,3651.509C8792.487,3617.683 8874.632,3592.813 8889.647,3659.729C8898.36,3698.561 8853.526,3694.877 8858.039,3762.493C8859.008,3777.01 8849.866,3778.32 8831.316,3777.642C8808.506,3776.809 8814.796,3754.523 8813.55,3739.835Z" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8813.703,3738.068C8833.902,3739.557 8837.555,3737.254 8857.725,3737.354" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,0.64837,0.251969,-1388.310643)">
+                        <path d="M8830.922,3778.656C8832.015,3791.604 8830.232,3797.132 8843.141,3795.414C8852.307,3794.194 8849.281,3781.351 8848.98,3780.072" style="fill:none;stroke:currentColor;stroke-width:7.42px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2719)">
+                        <path d="M8814.776,3753.88C8833.822,3753.875 8845.03,3752.862 8855.615,3752.656" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8817.508,3764.613C8837.739,3764.613 8850.521,3762.897 8857.34,3762.786" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                        <path d="M8825.212,3736.192C8834.647,3670.17 8831.347,3658.526 8817.743,3663.819C8791.539,3674.013 8836.94,3711.699 8863.751,3681.228C8872.3,3671.513 8864.95,3655.235 8855.725,3663.628C8839.684,3678.222 8846.388,3720.333 8847.736,3737.03" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M6795.395,3216.419C6795.428,3210.376 6795.462,3204.333 6795.495,3198.29" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg></div>
           <div class="mp-text">
             <div class="mp-title">Ein bisschen Humor</div>
             <div class="mp-desc">Weil Lachen über das eigene Chaos das Chaos nicht wegmacht — aber leichter trägt.</div>
           </div>
         </div>
+
         <div class="mission-point">
-          <div class="mp-icon">🌱</div>
+          <div class="mp-icon"><svg width="22px" height="22px" viewBox="0 0 198 241" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-7069.74875,-4402.715132)">
+        <g transform="matrix(1,0,0,1,-0.251969,2717)">
+            <g transform="matrix(-0.99681,-0.079817,-0.079817,0.99681,14462.047345,578.078728)">
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7203.364,4453.958C7198.076,4442.635 7211.259,4439.505 7217.519,4443.189C7227.81,4449.245 7233.633,4451.476 7232.818,4457.111C7232.612,4458.534 7234.398,4468.463 7222.799,4465.549" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7207.963,4440.967C7188.017,4410.839 7250.746,4392.459 7252.379,4436.096C7252.417,4437.104 7251.628,4443.742 7246.313,4448.646C7243.677,4451.078 7239.128,4454.525 7234.118,4454.526" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7203.128,4454.289C7202.932,4454.275 7111.441,4426.42 7081.269,4503.899C7080.92,4504.795 7071.301,4536.487 7075.008,4559.081C7083.651,4611.763 7125.785,4640.095 7160.311,4639.776C7214.418,4639.278 7218.155,4630.898 7243.98,4605.344C7261.314,4588.193 7277.018,4534.394 7255.538,4501.872C7233.175,4468.013 7224.21,4467.01 7203.128,4454.289Z" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7207.497,4473.218C7196.706,4467.367 7142.127,4453.573 7108.973,4487.145C7090.881,4505.465 7071.301,4570.871 7118.125,4606.068C7128.858,4614.137 7144.092,4626.229 7174.648,4625.815C7193.373,4625.56 7230.52,4606.064 7243.445,4574.589C7256.649,4542.431 7241.613,4507.542 7237.854,4501.667C7230.716,4490.511 7216.365,4478.026 7207.497,4473.218Z" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(0.925642,-0.378402,0.378402,0.925642,-1185.960922,334.395085)">
+                    <path d="M7160.664,4549.286L7145.538,4500.534L7179.291,4537.079C7179.291,4537.079 7187.89,4563.147 7196.443,4587.361C7187.016,4578.327 7160.664,4549.286 7160.664,4549.286Z" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(0.925642,-0.378402,0.378402,0.925642,-1185.960922,334.395085)">
+                    <path d="M7170.003,4542.744C7170.111,4542.03 7168.975,4543.065 7169.324,4542.357" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7168.133,4466.995C7168.133,4481.963 7168.112,4479.908 7168.058,4488.899" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,-3.748031,-2717)">
+                    <path d="M7095.128,4547.639C7106.079,4547.658 7105.983,4547.664 7116.932,4547.81" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,4.251969,-2717)">
+                    <path d="M7242.549,4549.388C7220.306,4549.414 7220.33,4549.432 7218.397,4549.426" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.251969,-2717)">
+                    <path d="M7170.898,4622.363C7170.893,4612.643 7170.941,4612.723 7170.786,4602.939" style="fill:none;stroke:currentColor;stroke-width:6.25px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg></div>
           <div class="mp-text">
             <div class="mp-title">Selbstverständnis</div>
             <div class="mp-desc">Sich selbst besser kennen — durch Fragen, Reflexion und visuelle Klarheit.</div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -699,7 +706,7 @@
   <div class="section-inner">
     <div class="produkte-intro">
       <div class="reveal">
-        <span class="section-label">die produktwelt</span>
+        <span class="section-label">Die Produktwelt</span>
         <h2 class="section-h2">Vier Wege,<br>dein Gehirn zu <em>begleiten</em></h2>
       </div>
       <p class="section-text reveal" style="max-width:260px; font-size:14px;">
@@ -709,12 +716,10 @@
 
     <div class="produkte-grid">
 
-      <div class="produkt-card p1 reveal">
-        <div class="p-number">01</div>
-        <div class="p-tag">begreifen</div>
-        <div class="p-name">Wissen<br>Booster</div>
-        <div class="p-subtitle">ADHS verstehen auf einen Blick</div>
-        <div class="p-desc">Infografiken und Wissen-Poster, die erklären wie das ADHS-Gehirn wirklich funktioniert — visuell, klar, zum Aufhängen.</div>
+      <div class="produkt-card reveal">
+        <span class="p-tag">Begreifen</span>
+        <div class="p-name">Wissen Booster</div>
+        <div class="p-desc">Infografiken und Poster, die erklären wie das ADHS-Gehirn wirklich funktioniert — visuell, klar, zum Aufhängen.</div>
         <div class="p-examples">
           <span class="p-example">Infografiken</span>
           <span class="p-example">Erklärungs-Poster</span>
@@ -722,11 +727,9 @@
         </div>
       </div>
 
-      <div class="produkt-card p2 reveal">
-        <div class="p-number">02</div>
-        <div class="p-tag">fühlen</div>
-        <div class="p-name">Humor &<br>Herz</div>
-        <div class="p-subtitle">Sprüche die treffen & schmunzeln lassen</div>
+      <div class="produkt-card reveal">
+        <span class="p-tag">Fühlen</span>
+        <div class="p-name">Humor & Herz</div>
         <div class="p-desc">Humorvolle Poster und Postkarten über das ADHS-Leben — für alle, die sich endlich wiedererkannt fühlen wollen.</div>
         <div class="p-examples">
           <span class="p-example">Sprüche-Poster</span>
@@ -735,11 +738,9 @@
         </div>
       </div>
 
-      <div class="produkt-card p3 reveal">
-        <div class="p-number">03</div>
-        <div class="p-tag">ordnen</div>
-        <div class="p-name">Externe<br>Struktur</div>
-        <div class="p-subtitle">Für dein Gehirn, von außen nach innen</div>
+      <div class="produkt-card reveal">
+        <span class="p-tag">Ordnen</span>
+        <div class="p-name">Externe Struktur</div>
         <div class="p-desc">Notion-Templates, Tracker und Planer — entwickelt für Gehirne, die externe Systeme brauchen weil das interne selten aufräumt.</div>
         <div class="p-examples">
           <span class="p-example">Notion Templates</span>
@@ -749,11 +750,9 @@
         </div>
       </div>
 
-      <div class="produkt-card p4 reveal">
-        <div class="p-number">04</div>
-        <div class="p-tag">entdecken</div>
-        <div class="p-name">Dich selbst<br>verstehen</div>
-        <div class="p-subtitle">Reflexion & Selbstkenntnis</div>
+      <div class="produkt-card reveal">
+        <span class="p-tag">Entdecken</span>
+        <div class="p-name">Dich selbst verstehen</div>
         <div class="p-desc">Arbeitsblätter und Workbooks mit Reflexionsfragen — um sich selbst besser zu kennen und das eigene ADHS zu verstehen.</div>
         <div class="p-examples">
           <span class="p-example">Workbooks</span>
@@ -771,18 +770,18 @@
 <!-- ÜBER MICH -->
 <section id="ueber">
   <div class="section-inner">
-    <span class="section-label reveal">über mich</span>
+    <span class="section-label reveal">Über mich</span>
     <div class="ueber-layout">
       <div class="ueber-avatar reveal">🧠</div>
       <div class="ueber-text reveal">
-        <div class="ueber-name">hirnspaziert</div>
+        <div class="ueber-name">Hirnspaziert</div>
         <div class="ueber-role">Gründerin · Neurodivergent · Visuell denkend</div>
         <p class="ueber-bio">
-          <strong>Hirnspaziert entsteht aus meiner eigenen Reise mit ADHS</strong> — dem Chaos im Kopf und der Suche nach visueller Klarheit.
+          <strong>Hirnspaziert ist aus meiner eigenen Reise mit ADHS entstanden</strong> — der Überforderung, dem Chaos im Kopf und dem Gefühl, anders zu sein.
           <br><br>
-          Ich habe lange gesucht nach Dingen, die mir helfen mich selbst zu verstehen, die mich zum Lachen bringen über das was in meinem Kopf passiert — und die mir trotzdem Struktur geben. Irgendwann habe ich aufgehört zu suchen und angefangen, sie selbst zu machen.
+          Ich habe lange nach Dingen gesucht, die mir helfen mich selbst zu verstehen, die mich zum Lachen bringen über das, was in meinem Kopf passiert — und die mir trotzdem Struktur geben. Irgendwann habe ich aufgehört zu suchen und angefangen, sie selbst zu machen.
           <br><br>
-          Hirnspaziert ist für alle, die ihren eigenen Kopf manchmal gerne hätten mit einer Bedienungsanleitung.
+          Mit einem Hintergrund in Grafik und im Sozialbereich bringe ich beides zusammen: Gestaltung, die anspricht — und Inhalte, die wirklich etwas bewegen.
         </p>
       </div>
     </div>
@@ -792,7 +791,7 @@
 <!-- KONTAKT -->
 <section id="kontakt">
   <div class="section-inner">
-    <span class="section-label">lass uns verbinden</span>
+    <span class="section-label">Lass uns verbinden</span>
     <h2 class="section-h2" style="margin-bottom:14px;">Dein Hirn <em>spaziert</em>?<br>Meins auch.</h2>
     <p class="section-text">Folg mir auf Instagram, schreib mir eine Nachricht — oder schau einfach mal rein. Du bist willkommen.</p>
     <br><br>
@@ -801,12 +800,40 @@
       <a href="#" class="social-link">🛒 Gumroad Shop</a>
       <a href="mailto:hallo@hirnspaziert.at" class="social-link">✉️ hallo@hirnspaziert.at</a>
     </div>
-    <div class="footer-note">© 2026 hirnspaziert · Österreich · Alle digitalen Produkte zum Download</div>
+    <div class="footer-note">
+      © 2026 Hirnspaziert · Österreich · Alle digitalen Produkte zum Download
+      &nbsp;·&nbsp; <a href="#impressum">Impressum</a>
+    </div>
+  </div>
+</section>
+
+<!-- IMPRESSUM -->
+<section id="impressum">
+  <div class="section-inner">
+    <span class="section-label">Impressum</span>
+    <h2 class="section-h2" style="font-size: clamp(24px, 3vw, 32px);">Angaben gemäß § 5 ECG</h2>
+    <div class="impressum-grid">
+      <div class="impressum-block">
+        <h3>Unternehmerin</h3>
+        <p>[Vor- und Nachname]<br>[Straße und Hausnummer]<br>[PLZ Ort]<br>Österreich</p>
+      </div>
+      <div class="impressum-block">
+        <h3>Kontakt</h3>
+        <p>E-Mail: hallo@hirnspaziert.at<br>[Telefon optional]</p>
+      </div>
+      <div class="impressum-block">
+        <h3>Unternehmensgegenstand</h3>
+        <p>[z. B. Erstellung und Verkauf digitaler Produkte]</p>
+      </div>
+      <div class="impressum-block">
+        <h3>UID / Steuernummer</h3>
+        <p>[UID-Nummer, falls vorhanden]<br>[Gewerbebehörde / Mitgliedschaft]</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -818,7 +845,6 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
